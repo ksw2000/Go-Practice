@@ -3,7 +3,7 @@ import "fmt"
 func main(){
     /*
         bool            true,false
-        byte            0,1
+        byte            8bits
         rune            Unicode (32bits)
         int/uint
         int8/unit8      8bits
