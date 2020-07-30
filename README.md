@@ -1,4 +1,4 @@
-GO-Practice
+# Go-Practice
 
 ## Files
 + bin/ (golang bin)
@@ -11,11 +11,9 @@ GO-Practice
 
         + liao2000/
 
-            + advance/
+            + basic/ (basic practice)
 
-            + basic
-
-            + p
+            + p/ (package practice)
 
 ## Qucik Start
 
