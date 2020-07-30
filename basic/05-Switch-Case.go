@@ -15,9 +15,9 @@ func pow(x,n,lim float64) float64{
 
 func main(){
     fmt.Println(
-		pow(3, 2, 10),
-		pow(3, 3, 20),
-	)
+        pow(3, 2, 10),
+        pow(3, 3, 20),
+    )
     //GO lang 的 switch case 中，不需使用 break;
     fmt.Print("Go runs on ")
     switch os:=runtime.GOOS; os{

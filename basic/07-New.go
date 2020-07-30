@@ -1,10 +1,11 @@
 package main
 import "fmt"
 type data struct{
-    x,y int
+    x, y int
 }
+
 func main(){
-    var p *data=new(data)
+    var p *data = new(data)
     p.x, p.y = 1, 2
     fmt.Println(p)
     pp := new(data)
