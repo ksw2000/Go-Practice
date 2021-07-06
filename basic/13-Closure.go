@@ -1,39 +1,44 @@
 package main
+
 import "fmt"
+
 func fibonacci() func() int {
-    back1, back2 := 0, 1
-    return func() int {
-        temp := back1
-        back1, back2 = back2, (back1 + back2)
-        return temp
-    }
+	back1, back2 := 0, 1
+	return func() int {
+		temp := back1
+		back1, back2 = back2, (back1 + back2)
+		return temp
+	}
 }
 
-//another example
-              // 回傳型態: [func() int]
-func intSeq() func() int{
-    i:=0
-    return func() int{
-        i+=1
-        return i
-    }
+func intSeq() func() int {
+	i := 0
+	return func() int {
+		i += 1
+		return i
+	}
 }
 
-func main(){
-    //demo fibonacci()
+func main() {
+	//demo fibonacci()
 	f := fibonacci()
 	for i := 0; i < 10; i++ {
-		fmt.Print(f()," ")
+		fmt.Print(f(), " ")
 	}
-    //demo intSeq
-    fmt.Println()
+	// 0 1 1 2 3 5 8 13 21 34
 
-    nextInt := intSeq()
-    fmt.Println(nextInt())
-    fmt.Println(nextInt())
-    fmt.Println(nextInt())
-    fmt.Println("更新")
+	//demo intSeq
+	fmt.Println()
 
-    newNextInt := intSeq()
-    fmt.Println(newNextInt())
+	nextInt := intSeq()
+	fmt.Println(nextInt()) // 1
+	fmt.Println(nextInt()) // 2
+	fmt.Println(nextInt()) // 3
+	fmt.Println()
+
+	newNextInt := intSeq()
+	fmt.Println("update...")
+	fmt.Println(newNextInt()) // 1
+	fmt.Println(newNextInt()) // 2
+	fmt.Println(newNextInt()) // 3
 }
