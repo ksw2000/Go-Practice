@@ -1,89 +1,85 @@
 package main
+
 import (
-    "fmt"
-    "os"
+	"fmt"
+	"sort"
 )
 
-// interface 是由一組方法定義的集合
-// interface 是一種類型，interface是一組具有多一組方法的類型
-// 在 GO 中，並不像 C++ 或 Java 一樣，要由特定的 class 才能實作 interface
-// GO 只要類型 T 的方法符合 介面 I 就可以實作
+/*
+sort package
+type Interface interface {
+	Len is the number of elements in the collection.
+	Len() int
 
-type operate interface{
-    BubbleSort() []int
-    Reverse()
-    Max() int
+	Less reports whether the element with index i
+	must sort before the element with index j.
+
+	If both Less(i, j) and Less(j, i) are false,
+	then the elements at index i and j are considered equal.
+	Sort may place equal elements in any order in the final result,
+	while Stable preserves the original input order of equal elements.
+
+	Less must describe a transitive ordering:
+	 - if both Less(i, j) and Less(j, k) are true, then Less(i, k) must be true as well.
+	 - if both Less(i, j) and Less(j, k) are false, then Less(i, k) must be false as well.
+
+	Note that floating-point comparison (the < operator on float32 or float64 values)
+	is not a transitive ordering when not-a-number (NaN) values are involved.
+	See Float64Slice.Less for a correct implementation for floating-point values.
+	Less(i, j int) bool
+
+	Swap swaps the elements with indexes i and j.
+	Swap(i, j int)
+}
+*/
+
+type Pair struct {
+	key int
+	val string
 }
 
-type list struct{
-    val []int
+type Pairs []Pair
+
+func (p Pairs) Len() int {
+	return len(p)
 }
 
-func (arr *list) BubbleSort() []int{
-    for i:=0; i<len(arr.val)-1; i++{
-        for j:=0; j<len(arr.val)-1-i; j++{
-            if arr.val[j]>arr.val[j+1]{
-                arr.val[j], arr.val[j+1] = arr.val[j+1], arr.val[j]
-            }
-        }
-    }
-    return arr.val
+func (p Pairs) Less(i, j int) bool {
+	return p[i].key-p[j].key < 0
 }
 
-func (arr *list) Reverse(){
-    for i:=0; i<len(arr.val)/2; i++{
-        arr.val[i], arr.val[len(arr.val)-1-i] = arr.val[len(arr.val)-1-i], arr.val[i]
-    }
+func (p Pairs) Swap(i, j int) {
+	p[i], p[j] = p[j], p[i]
 }
 
-func (arr list) Max() int{
-    if(len(arr.val)>0){
-        tmp := arr.val[0]
-        for _,v := range(arr.val){
-            if v > tmp{
-                tmp = v
-            }
-        }
-        return tmp
-    }
-    fmt.Fprintf(os.Stderr,"Empty array\n")
-    os.Exit(1)
-    return 0
-}
+func main() {
+	p1 := Pair{
+		key: 2009,
+		val: "Go",
+	}
+	p2 := Pair{
+		key: 2010,
+		val: "Rust",
+	}
+	p3 := Pair{
+		key: 2011,
+		val: "Kotlin",
+	}
+	p4 := Pair{
+		key: 2011,
+		val: "Dart",
+	}
+	p5 := Pair{
+		key: 2012,
+		val: "typescript",
+	}
+	list := Pairs{p1, p3, p2, p4, p5}
+	fmt.Println(list)
+	sort.Sort(list)
+	fmt.Println(list)
 
-type listFloat struct{
-    val []float64
-}
-
-func (arr *listFloat) BubbleSort(){
-    for i:=0; i<len(arr.val)-1; i++{
-        for j:=0; j<len(arr.val)-1-i; j++{
-            if arr.val[j]>arr.val[j+1]{
-                arr.val[j], arr.val[j+1] = arr.val[j+1], arr.val[j]
-            }
-        }
-    }
-}
-
-func main(){
-    fmt.Println("Hello world")
-    var arr list
-    arr.val = []int{12,32,43,11,54,25,37,88}
-    (&arr).BubbleSort()
-    fmt.Println(arr.val)
-    (&arr).Reverse()
-    fmt.Println(arr.val)
-    fmt.Println(arr.Max())
-
-    var arrf listFloat
-    arrf.val = []float64{1.2, 8.31, 12.89, 0.98, -12.3}
-    (&arrf).BubbleSort()
-    fmt.Println(arrf.val)
-
-    //用interface型態
-    var l list
-    var o operate
-    l.val = []int{1,4,9,23,64,13,63}
-    o = &l
-    fmt.Println(o.BubbleSort())
+	// Interfaces in Go provide a way to specify the behavior of an object:
+	// if something can do this, then it can be used here.
+	// Pairs can do `Len()`, `Less()` and `Swap()`
+	// so we can consider `Pairs` as `sort.Interface()`
 }
