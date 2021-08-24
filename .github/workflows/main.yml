@@ -16,15 +16,10 @@ jobs:
       steps:
         - name: push
           run: |
-            git clone https://github.com/DSC-NCHU/Go-Tutorial.git
-            cd Go-Tutorial
-            mkdir Notebook
-            cp ../Notebook/* Go-Tutorial/Notebook
             git init
-            git config user.name  "CI"
-            git config user.email "liao2000@github"
+            git config user.name  "Push-CI"
+            git config user.email "pushCI@github.com"
             git remote add secure-origin https://${{ secrets.API_TOKEN_GITHUB }}@github.com/DSC-NCHU/Go-Tutorial
-            git add .
+            git add Notebook
             git commit -m "automatically push form liao2000/Go-Practice.git"
             git push --force
-            
