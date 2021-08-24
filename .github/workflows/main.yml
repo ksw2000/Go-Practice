@@ -1,0 +1,29 @@
+name: Push notebook to DSC-NCHU
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Push directory to another repository
+          # You may pin to the exact commit or the version.
+          # uses: cpina/github-action-push-to-another-repository@8e9bfb00e6687c3f5cbc272c09b9dd2c27c7720c
+          uses: cpina/github-action-push-to-another-repository@v1.3
+          with:
+            # Source directory from the origin directory
+            source-directory: Notebook
+            # Name of the destination username/organization
+            destination-github-username: DSC-NCHU
+            # Destination repository
+            destination-repository-name: Go-Tutorial
+            # Email for the git commit
+            commit-message: commite from @liao2000
