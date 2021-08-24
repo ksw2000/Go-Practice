@@ -16,7 +16,7 @@ jobs:
       steps:
         - name: Copy
           run: |
-            mkdir tmp/Notebook
+            mkdir -p tmp/Notebook
             cp Notebook/* tmp/
             
         - name: Push directory to another repository
