@@ -1,5 +1,5 @@
-name: Push notebook to DSC-NCHU
-on: [push, pull_request]
+name: Push Notebook to DSC-NCHU/Go-Tutorial
+on: [push]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -7,22 +7,23 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
-        - name: Git Clone DSC-NCHU/Go-Tutorial
-          uses: sudosubin/git-clone-action@v1.0.1
+        - name: Copy
+          run: |
+            mkdir tmp
+            cp -R Notebook tmp
+        - name: Push directory to another repository
+          # You may pin to the exact commit or the version.
+          # uses: cpina/github-action-push-to-another-repository@8e9bfb00e6687c3f5cbc272c09b9dd2c27c7720c
+          uses: cpina/github-action-push-to-another-repository@v1.3
+          env: 
+            API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
           with:
-            repository: DSC-NCHU/Go-Tutorial
-            path: Go-Tutorial
-        - name: Copy Notebooks to DSC-NCHU
-          run: |
-            cp -R Notebook Go-Tutorial
-            rm -r Go-Tutorial/.git
-        - name: Push from liao2000 to DSC-NCHU
-          run: |
-            cd Go-Tutorial
-            git config user.name  "CI"
-            git config user.email "liao2000@github"
-            git remote add secure-origin https://${{ secrets.API_TOKEN_GITHUB }}@github.com/DSC-NCHU/Go-Tutorial
-            git init
-            git add .
-            git commit -m "automatically push form liao2000/Go-Practice.git"
-            git push --force
+            # Source directory from the origin directory
+            source-directory: tmp/Notebook
+            # Name of the destination username/organization
+            destination-github-username: DSC-NCHU
+            # Destination repository
+            destination-repository-name: Go-Tutorial
+            # Email for the git commit
+            commit-message: Sync from liao2000/Go-Practice 
+            target-branch: main
