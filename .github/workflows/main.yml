@@ -20,6 +20,6 @@ jobs:
             git config user.name  "Push-CI"
             git config user.email "pushCI@github.com"
             git remote add secure-origin https://${{ secrets.API_TOKEN_GITHUB }}@github.com/DSC-NCHU/Go-Tutorial
-            git add Notebook
+            git add Notebook/*
             git commit -m "automatically push form liao2000/Go-Practice.git"
             git push --force
