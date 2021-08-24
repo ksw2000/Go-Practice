@@ -7,9 +7,10 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
-        - name: Clone from DSC-NCHU
-          run: |
-            gh repo clone DSC-NCHU/Go-Tutorial
+        - name: Git Clone DSC-NCHU/Go-Tutorial
+          uses: sudosubin/git-clone-action@v1.0.1
+          with:
+            repository: DSC-NCHU/Go-Tutorial
         - name: Copy Notebooks to DSC-NCHU
           run: |
             cp -R Notebook Go-Tutorial
