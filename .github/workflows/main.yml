@@ -17,7 +17,7 @@ jobs:
         - name: Copy
           run: |
             mkdir -p tmp/Notebook
-            cp Notebook/* tmp/
+            cp -r Notebook tmp/Notebook
             
         - name: Push directory to another repository
           # You may pin to the exact commit or the version.
