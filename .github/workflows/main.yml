@@ -11,6 +11,7 @@ jobs:
           uses: sudosubin/git-clone-action@v1.0.1
           with:
             repository: DSC-NCHU/Go-Tutorial
+            path: Go-Tutorial
         - name: Copy Notebooks to DSC-NCHU
           run: |
             cp -R Notebook Go-Tutorial
