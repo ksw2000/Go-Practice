@@ -29,3 +29,4 @@ jobs:
             destination-repository-name: Go-Tutorial
             # Email for the git commit
             commit-message: commite from @liao2000
+            target-branch: main
