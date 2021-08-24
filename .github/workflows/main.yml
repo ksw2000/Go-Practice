@@ -16,7 +16,7 @@ jobs:
       steps:
         - name: Copy
           run: |
-            ls -l
+            ${GITHUB_WORKSPACE}
             mkdir tmp
             chmod 666 tmp
             chmod -R 666 Notebook
