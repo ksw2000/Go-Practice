@@ -14,19 +14,17 @@ jobs:
   build:
       runs-on: ubuntu-latest
       steps:
-        - name: Push directory to another repository
-          # You may pin to the exact commit or the version.
-          # uses: cpina/github-action-push-to-another-repository@8e9bfb00e6687c3f5cbc272c09b9dd2c27c7720c
-          uses: cpina/github-action-push-to-another-repository@v1.3
-          env: 
-            API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-          with:
-            # Source directory from the origin directory
-            source-directory: Notebook
-            # Name of the destination username/organization
-            destination-github-username: DSC-NCHU
-            # Destination repository
-            destination-repository-name: Go-Tutorial
-            # Email for the git commit
-            commit-message: commite from @liao2000
-            target-branch: main
+        - name: push
+          run: |
+            git clone https://github.com/DSC-NCHU/Go-Tutorial.git
+            cd Go-Tutorial
+            mkdir Notebook
+            cp ../Notebook/* Go-Tutorial/Notebook
+            git init
+            git config user.name  "CI"
+            git config user.email "liao2000@github"
+            git remote add secure-origin https://${{ secrets.API_TOKEN_GITHUB }}@github.com/DSC-NCHU/Go-Tutorial
+            git add .
+            git commit -m "automatically push form liao2000/Go-Practice.git"
+            git push --force
+            
